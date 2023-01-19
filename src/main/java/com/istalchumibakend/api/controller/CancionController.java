@@ -33,17 +33,6 @@ public class CancionController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(cancionService.save(cancion));
 	}
 	
-	@PostMapping
-	public ResponseEntity<?> addList(@RequestBody Cancion canciondetails,@PathVariable(value="id")Long id_cancion){
-		Optional<Cancion> oCancion= cancionService.findById(id_cancion);
-		if(!oCancion.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		oCancion.get().setLista(canciondetails.getLista());
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(cancionService.save(oCancion.get()));
-	}
-	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read (@PathVariable(value="id")Long id_cancion){
 		Optional<Cancion> oCancion= cancionService.findById(id_cancion);
